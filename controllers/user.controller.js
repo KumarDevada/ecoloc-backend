@@ -33,7 +33,7 @@ export const createUser = [
             const pwd = req.body.password;
             const email = req.body.email;
 
-            const hashedPwd = await bcrypt(pwd, 10);
+            const hashedPwd = await bcrypt.hash(pwd, 10);
             const user = new User({ username: uname, password: hashedPwd, email: email });
             await user.save();
 
