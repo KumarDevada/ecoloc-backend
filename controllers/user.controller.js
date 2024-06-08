@@ -43,8 +43,6 @@ export const createUser = [
                     username: user.username,
                     userId: user._id,
                     email: user.email,
-                    joinedAt: user.joinedAt,
-                    avatar: avatar
                 },
             };
 
