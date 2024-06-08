@@ -2,8 +2,25 @@ import Facilitator from "../models/facilitator.js";
 
 export const getNearestFacilitator = async (req, res) => {
     try {
-        const requestedState = req.body.state;
+        const requestedState = req.params.state;
         const facilitatorList = await Facilitator.find({ state: requestedState });
+
+        const response = {
+            success: true,
+            data: facilitatorList
+        }
+
+        res.status(200).json(response);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
+export const getAllFacilitator = async (req, res) => {
+    try {
+        const requestedState = req.body.state;
+        const facilitatorList = await Facilitator.find();
 
         const response = {
             success: true,
