@@ -20,7 +20,7 @@ export const placeOrder = async (req, res) => {
         });
 
         const totalCredits = Math.round(price * (0.05))
-        user.credits = totalCredits;
+        user.credits += totalCredits;
 
         await user.save();
         const { username, credits, treesPlanted, numberOfItemsRecycled, walletAmount } = user;
