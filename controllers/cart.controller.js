@@ -11,8 +11,8 @@ export const addItemToCart = async (req, res) => {
         }
 
         const cartId = cart._id;
-        const { product, credits, price } = req.body;
-        const newOrder = new Order({ userId: userId, cartId: cartId, product: product, credits: credits, price: price });
+        const { product, price } = req.body;
+        const newOrder = new Order({ userId: userId, cartId: cartId, product: product, price: price });
         cart.orders.push(newOrder._id);
         await cart.save();
 
@@ -32,7 +32,7 @@ export const removeItem = async (req, res) => {
             return order.toString() !== orderId;
         });
         await cart.save();
-        
+
         return res.status(200).json({ success: true, message: 'item removed from cart' });
     } catch (error) {
         console.log(error.message);

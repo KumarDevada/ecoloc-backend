@@ -8,15 +8,20 @@ export const placeOrder = async (req, res) => {
         const cart = await Cart.findOne({ userId: userId });
         const user = await User.findById(userId);
         const ordersList = cart.orders;
+        let price = 0;
         ordersList.forEach(async (orderId) => {
             const order = await Order.findById(orderId);
             order.isInCart = false;
             user.numberOfItemsRecycled += 1
-            user.credits += order.credits;
+            price += order.price;
             user.walletAmount += order.price;
             user.treesPlanted = user.walletAmount / 555;
             await order.save();
         });
+
+        const credits = round(price * (0.05))
+        user.credits = credits;
+        
         await user.save();
 
         return res.status(200).json({ success: true, message: 'cart checked out' });
