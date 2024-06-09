@@ -10,7 +10,6 @@ export const placeOrder = async (req, res) => {
         const ordersList = cart.orders;
         let price = 0;
         ordersList.forEach(async (orderId) => {
-            console.log(orderId);
             const order = await Order.findById(orderId.toString());
             console.log(order);
             order.isInCart = false;
@@ -21,12 +20,13 @@ export const placeOrder = async (req, res) => {
             await order.save();
         });
 
-        const credits = Math.round(price * (0.05))
-        user.credits = credits;
+        const totalCredits = Math.round(price * (0.05))
+        user.credits = totalCredits;
 
         await user.save();
-
-        return res.status(200).json({ success: true, message: 'cart checked out' });
+        const { username, credits, treesPlanted, numberOfItemsRecycled, walletAmount } = user;
+        const userInfo = { username, credits, treesPlanted, numberOfItemsRecycled, walletAmount }
+        return res.status(200).json({ success: true, message: 'cart checked out', data: {...userInfo} });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: error.message });

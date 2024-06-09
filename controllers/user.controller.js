@@ -84,7 +84,7 @@ export const userLogin = [
                 return res.status(401).json({ success: false, message: "invalid password" });
             }
 
-            const { username, email, _id, credits, treesPlanted } = user;
+            const { username, email, _id, credits, treesPlanted, walletAmount, numberOfItemsRecycled } = user;
             const userPlayload = { username, email, userId: _id, credits, treesPlanted, walletAmount, numberOfItemsRecycled };
 
             const accessToken = generateAccessToken(userPlayload);
