@@ -5,18 +5,17 @@ import Order from '../models/order.js';
 export const placeOrder = async (req, res) => {
     try {
         const userId = req.user.userInfo.userId;
-        const cart = await Cart.findOne({ userId: userId });
+        // const cart = await Cart.findOne({ userId: userId });
         const user = await User.findById(userId);
-        const ordersList = cart.orders;
+        const ordersList = await Order.find({ userId: userId, isInCart: true });
         let price = 0;
-        ordersList.forEach(async (orderId) => {
-            const order = await Order.findById(orderId.toString());
+        ordersList.forEach(async (order) => {
             console.log(order);
             order.isInCart = false;
             user.numberOfItemsRecycled += 1
             price += order.price;
             user.walletAmount += order.price;
-            user.treesPlanted = user.walletAmount / 555;
+            user.treesPlanted = Math.round(user.walletAmount / 555);
             await order.save();
         });
 

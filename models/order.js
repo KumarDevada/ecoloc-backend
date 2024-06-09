@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    cartId: { type: Schema.Types.ObjectId, ref: 'Cart', required: true },
+    // cartId: { type: Schema.Types.ObjectId, ref: 'Cart', required: true },
     product: { type: String },
     price: { type: Number },
     isInCart: { type: Boolean, default: true },
