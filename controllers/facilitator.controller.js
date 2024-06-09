@@ -19,7 +19,6 @@ export const getNearestFacilitator = async (req, res) => {
 
 export const getAllFacilitator = async (req, res) => {
     try {
-        const requestedState = req.body.state;
         const facilitatorList = await Facilitator.find();
 
         const response = {
@@ -52,7 +51,6 @@ export const addFacilitator = async (req, res) => {
         res.status(200).json(response);
     } catch (error) {
         console.error(error);
-        console.log('hello');
         res.status(500).json({ success: false, message: error.message });
     }
 }

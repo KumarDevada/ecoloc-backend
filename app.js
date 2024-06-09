@@ -6,6 +6,7 @@ import logger from 'morgan';
 import userRouter from './routes/user.router.js';
 import categoryRouter from './routes/category.router.js';
 import facilitatorRouter from './routes/facilitator.router.js';
+import cartRouter from './routes/cart.router.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -25,6 +26,7 @@ connectDb();
 app.use('/api/users', userRouter);
 app.use('/api/categories', categoryRouter);
 app.use('/api/facilitators', facilitatorRouter);
+app.use('/api/cart', cartRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`server is listening at ${process.env.PORT}...`);
