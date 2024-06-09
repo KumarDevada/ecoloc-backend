@@ -10,7 +10,9 @@ export const placeOrder = async (req, res) => {
         const ordersList = cart.orders;
         let price = 0;
         ordersList.forEach(async (orderId) => {
-            const order = await Order.findById(orderId);
+            console.log(orderId);
+            const order = await Order.findById(orderId.toString());
+            console.log(order);
             order.isInCart = false;
             user.numberOfItemsRecycled += 1
             price += order.price;
