@@ -1,6 +1,18 @@
 import Cart from '../models/cart.js';
 import Order from '../models/order.js';
 
+export const getAllItems = async (req, res) => {
+    try {
+        const userId = req.user.userInfo.userId;
+        const itemsList = await Cart.find({ userId: userId }).populate('orders');
+
+        return res.status(200).json({ success: true, data: itemsList.orders });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({ success: false, message: error.message });
+    }
+}
+
 export const addItemToCart = async (req, res) => {
     try {
         const userId = req.user.userInfo.userId;
