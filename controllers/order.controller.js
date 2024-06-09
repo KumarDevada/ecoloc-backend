@@ -19,9 +19,9 @@ export const placeOrder = async (req, res) => {
             await order.save();
         });
 
-        const credits = round(price * (0.05))
+        const credits = Math.round(price * (0.05))
         user.credits = credits;
-        
+
         await user.save();
 
         return res.status(200).json({ success: true, message: 'cart checked out' });

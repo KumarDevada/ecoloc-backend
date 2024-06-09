@@ -85,7 +85,7 @@ export const userLogin = [
             }
 
             const { username, email, _id, credits, treesPlanted } = user;
-            const userPlayload = { username, email, userId: _id, credits, treesPlanted };
+            const userPlayload = { username, email, userId: _id, credits, treesPlanted, walletAmount, numberOfItemsRecycled };
 
             const accessToken = generateAccessToken(userPlayload);
 
